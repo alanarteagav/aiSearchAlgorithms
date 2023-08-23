@@ -8,6 +8,7 @@ type Vertex struct {
 	Priority int
 	Visited  bool
 	Parent   *Vertex
+	Value    int
 }
 
 func NewVertex(id int) *Vertex {
@@ -25,7 +26,7 @@ type Edge struct {
 	V int
 }
 
-type WeightedEdges map[Edge]float64
+type WeightedEdges map[Edge]int
 type Vertices map[int]*Vertex
 
 type Graph interface {

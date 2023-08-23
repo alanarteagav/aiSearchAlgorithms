@@ -17,7 +17,7 @@ const (
 
 func GetTestGraph(name GraphName) graph.Graph {
 	var matrix [][]byte
-	var weightedMatrix [][]float64
+	var weightedMatrix [][]int
 	var implementation GraphImplementation
 	var g graph.Graph
 	switch name {
@@ -33,7 +33,7 @@ func GetTestGraph(name GraphName) graph.Graph {
 		}
 		implementation = matrixGraph
 	case Graph07W:
-		weightedMatrix = [][]float64{
+		weightedMatrix = [][]int{
 			{0, 9, 1, 0, 0, 0, 0},
 			{9, 0, 0, 9, 0, 0, 0},
 			{1, 0, 0, 0, 0, 0, 2},

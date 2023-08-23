@@ -4,7 +4,7 @@ import (
 	"aiSearchAlgorithms/internal/graph"
 )
 
-type SearchAlgorithm func(g *graph.Graph, v *graph.Vertex, goal int)
+type SearchAlgorithm func(g *graph.Graph, v *graph.Vertex, goal int) *graph.Vertex
 
 func Path(v *graph.Vertex) []*graph.Vertex {
 	path := []*graph.Vertex{}
@@ -17,8 +17,8 @@ func Path(v *graph.Vertex) []*graph.Vertex {
 	return path
 }
 
-func PathWeight(v *graph.Vertex, edges graph.WeightedEdges) float64 {
-	weight := 0.0
+func PathWeight(v *graph.Vertex, edges graph.WeightedEdges) int {
+	weight := 0
 	path := Path(v)
 	for i := 0; i < len(path)-1; i++ {
 		edge := &graph.Edge{U: path[i].Id, V: path[i+1].Id}

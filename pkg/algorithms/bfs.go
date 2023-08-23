@@ -5,7 +5,7 @@ import (
 	"aiSearchAlgorithms/pkg/algorithms/vpriorityqueue"
 )
 
-func BFS(g graph.Graph, r *graph.Vertex, goal int) {
+func BFS(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 	pq := new(vpriorityqueue.VPriorityQueue)
 	g.InitializeVertices()
 
@@ -19,6 +19,9 @@ func BFS(g graph.Graph, r *graph.Vertex, goal int) {
 
 	for len(*pq) != 0 {
 		x := pq.PopVertex()
+		if x.Value == goal {
+			return x
+		}
 		for _, y := range g.Neighbours(x) {
 			if !y.Visited {
 				i += 1
@@ -31,4 +34,5 @@ func BFS(g graph.Graph, r *graph.Vertex, goal int) {
 			}
 		}
 	}
+	return nil
 }

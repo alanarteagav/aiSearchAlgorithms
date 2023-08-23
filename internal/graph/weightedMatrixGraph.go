@@ -2,7 +2,7 @@ package graph
 
 import "errors"
 
-type weightedAdjacencyMatrix = [][]float64
+type weightedAdjacencyMatrix = [][]int
 
 type WeightedMatrixGraph struct {
 	matrix   weightedAdjacencyMatrix
@@ -13,7 +13,7 @@ type WeightedMatrixGraph struct {
 func NewWeightedMatrixGraph(matrix weightedAdjacencyMatrix) (*WeightedMatrixGraph,
 	error) {
 	vertices := map[int]*Vertex{}
-	edges := map[Edge]float64{}
+	edges := map[Edge]int{}
 	for i, v := range matrix {
 		vertices[i] = NewVertex(i)
 		for j, w := range v {
