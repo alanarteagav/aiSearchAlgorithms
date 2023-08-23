@@ -8,11 +8,11 @@ import (
 
 func main() {
 
-	g := testdata.GetTestGraph(testdata.Graph07WDFS)
+	g := testdata.GetTestGraph(testdata.GraphRomania0)
 	vertices := g.Vertices()
 
 	//setting the goal
-	vertices[5].Value = 1
+	vertices[4].Value = 1
 
 	/*
 		// =================== DFS ================
@@ -59,7 +59,7 @@ func main() {
 
 	// =================== IDS ================
 	fmt.Println("\nIDS execution:")
-	answer := algorithms.IDS(g, vertices[0], 1)
+	answer := algorithms.UCS(g, vertices[0], 1)
 
 	vertices = g.Vertices()
 

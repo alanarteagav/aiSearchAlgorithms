@@ -6,9 +6,10 @@ type GraphName string
 type GraphImplementation string
 
 const (
-	Graph07     GraphName = "Graph07"
-	Graph07W    GraphName = "Graph07W"
-	Graph07WDFS GraphName = "Graph07WDFS"
+	Graph07       GraphName = "Graph07"
+	Graph07W      GraphName = "Graph07W"
+	Graph07WDFS   GraphName = "Graph07WDFS"
+	GraphRomania0 GraphName = "GraphRomania0"
 )
 
 const (
@@ -53,6 +54,15 @@ func GetTestGraph(name GraphName) graph.Graph {
 			{0, 0, 0, 9, 0, 9, 0},
 			{0, 0, 0, 0, 9, 0, 9},
 			{0, 0, 0, 0, 0, 9, 0},
+		}
+		implementation = weightedMatrixGraph
+	case GraphRomania0:
+		weightedMatrix = [][]int{
+			{0, 80, 99, 0, 0},
+			{80, 0, 0, 97, 0},
+			{99, 0, 0, 0, 211},
+			{0, 97, 0, 0, 101},
+			{0, 0, 211, 101, 0},
 		}
 		implementation = weightedMatrixGraph
 	}

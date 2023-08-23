@@ -3,14 +3,11 @@ package algorithms
 import (
 	"aiSearchAlgorithms/internal/graph"
 	"aiSearchAlgorithms/pkg/algorithms/vpriorityqueue"
-	"fmt"
 )
 
 // Iterative Deepening depth-first Search (IDS) implementation
 func IDS(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 	for l := 1; l < len(g.Vertices()); l++ {
-
-		fmt.Printf("Max level : %d\n", l)
 		pq := new(vpriorityqueue.VPriorityQueue)
 		g.InitializeVertices()
 
@@ -25,7 +22,6 @@ func IDS(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 
 		for len(*pq) != 0 {
 			x := pq.PopVertex()
-			fmt.Println(x)
 			if x.Value == goal {
 				return x
 			}

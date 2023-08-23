@@ -5,17 +5,12 @@ import (
 	"aiSearchAlgorithms/pkg/algorithms/vpriorityqueue"
 )
 
-// Breadth First Search implementation
-func BFS(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
+func UCS(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 	pq := new(vpriorityqueue.VPriorityQueue)
 	g.InitializeVertices()
 
-	i := 1
 	r.Visited = true
-	r.Parent = nil
-	r.Time = i
-	r.Level = 0
-	r.Priority = -1
+	r.Priority = 0
 	pq.AddVertex(r)
 
 	for len(*pq) != 0 {
@@ -24,14 +19,15 @@ func BFS(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 			return x
 		}
 		for _, y := range g.Neighbours(x) {
+			edge := &graph.Edge{U: x.Id, V: y.Id}
 			if !y.Visited {
-				i += 1
+				y.Priority = g.Edges()[*edge] + x.Priority
 				y.Visited = true
 				y.Parent = x
-				y.Time = i
-				y.Level = x.Level + 1
-				y.Priority = i
 				pq.AddVertex(y)
+			} else if y.Priority > g.Edges()[*edge]+x.Priority {
+				y.Priority = g.Edges()[*edge] + x.Priority
+				y.Parent = x
 			}
 		}
 	}
