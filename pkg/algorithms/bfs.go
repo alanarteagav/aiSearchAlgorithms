@@ -5,27 +5,28 @@ import (
 	"aiSearchAlgorithms/pkg/algorithms/vpriorityqueue"
 )
 
-func DFS(g graph.Graph, r *graph.Vertex, goal int) {
+func BFS(g graph.Graph, r *graph.Vertex, goal int) {
 	pq := new(vpriorityqueue.VPriorityQueue)
-	n := len(g.Vertices())
-	i := 0
+	g.InitializeVertices()
+
+	i := 1
 	r.Visited = true
 	r.Parent = nil
 	r.Time = i
 	r.Level = 0
-	r.Priority = n
+	r.Priority = -1
 	pq.AddVertex(r)
 
 	for len(*pq) != 0 {
 		x := pq.PopVertex()
-		i += 1
 		for _, y := range g.Neighbours(x) {
 			if !y.Visited {
-				y.Time = i
-				y.Level = x.Level + 1
-				y.Priority = n - y.Level
+				i += 1
 				y.Visited = true
 				y.Parent = x
+				y.Time = i
+				y.Level = x.Level + 1
+				y.Priority = i
 				pq.AddVertex(y)
 			}
 		}

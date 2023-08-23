@@ -2,32 +2,38 @@ package graph
 
 import "errors"
 
-type adjacencyMatrix = [][]byte
+type weightedAdjacencyMatrix = [][]float64
 
-type MatrixGraph struct {
-	matrix   adjacencyMatrix
+type WeightedMatrixGraph struct {
+	matrix   weightedAdjacencyMatrix
 	edges    WeightedEdges
 	vertices Vertices
 }
 
-func NewMatrixGraph(matrix adjacencyMatrix) (*MatrixGraph, error) {
+func NewWeightedMatrixGraph(matrix weightedAdjacencyMatrix) (*WeightedMatrixGraph,
+	error) {
 	vertices := map[int]*Vertex{}
+	edges := map[Edge]float64{}
 	for i, v := range matrix {
 		vertices[i] = NewVertex(i)
 		for j, w := range v {
 			if i < j && w != matrix[j][i] {
 				return nil, errors.New("assymetric graph error")
 			}
+			if matrix[i][j] != 0 {
+				edge := &Edge{U: i, V: j}
+				edges[*edge] = matrix[i][j]
+			}
 		}
 	}
-	return &MatrixGraph{
+	return &WeightedMatrixGraph{
 		matrix:   matrix,
-		edges:    nil,
+		edges:    edges,
 		vertices: vertices,
 	}, nil
 }
 
-func (g *MatrixGraph) Neighbours(node *Vertex) []*Vertex {
+func (g *WeightedMatrixGraph) Neighbours(node *Vertex) []*Vertex {
 	neighbours := []*Vertex{}
 	id := node.Id
 	for i, adjacent := range g.matrix[id] {
@@ -38,15 +44,15 @@ func (g *MatrixGraph) Neighbours(node *Vertex) []*Vertex {
 	return neighbours
 }
 
-func (g *MatrixGraph) Vertices() Vertices {
+func (g *WeightedMatrixGraph) Vertices() Vertices {
 	return g.vertices
 }
 
-func (g *MatrixGraph) Edges() WeightedEdges {
+func (g *WeightedMatrixGraph) Edges() WeightedEdges {
 	return g.edges
 }
 
-func (g *MatrixGraph) InitializeVertices() {
+func (g *WeightedMatrixGraph) InitializeVertices() {
 	for i, _ := range g.matrix {
 		g.vertices[i] = NewVertex(i)
 	}
