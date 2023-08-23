@@ -7,6 +7,8 @@ import (
 
 func DFS(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 	pq := new(vpriorityqueue.VPriorityQueue)
+	g.InitializeVertices()
+
 	n := len(g.Vertices())
 	i := 0
 	r.Visited = true

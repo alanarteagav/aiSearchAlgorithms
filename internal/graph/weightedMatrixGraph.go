@@ -53,7 +53,10 @@ func (g *WeightedMatrixGraph) Edges() WeightedEdges {
 }
 
 func (g *WeightedMatrixGraph) InitializeVertices() {
-	for i, _ := range g.matrix {
-		g.vertices[i] = NewVertex(i)
+	for _, v := range g.vertices {
+		v.Time, v.Level = -1, -1
+		v.Priority = -1
+		v.Visited = false
+		v.Parent = nil
 	}
 }
