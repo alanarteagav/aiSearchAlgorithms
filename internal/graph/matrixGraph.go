@@ -5,9 +5,10 @@ import "errors"
 type adjacencyMatrix = [][]byte
 
 type MatrixGraph struct {
-	matrix   adjacencyMatrix
-	edges    WeightedEdges
-	vertices Vertices
+	matrix    adjacencyMatrix
+	edges     WeightedEdges
+	vertices  Vertices
+	heuristic Heuristic
 }
 
 func NewMatrixGraph(matrix adjacencyMatrix) (*MatrixGraph, error) {
@@ -21,9 +22,10 @@ func NewMatrixGraph(matrix adjacencyMatrix) (*MatrixGraph, error) {
 		}
 	}
 	return &MatrixGraph{
-		matrix:   matrix,
-		edges:    nil,
-		vertices: vertices,
+		matrix:    matrix,
+		edges:     nil,
+		vertices:  vertices,
+		heuristic: *new(map[int]float64),
 	}, nil
 }
 
@@ -53,4 +55,12 @@ func (g *MatrixGraph) InitializeVertices() {
 		v.Visited = false
 		v.Parent = nil
 	}
+}
+
+func (g *MatrixGraph) SetHeuristic(h Heuristic) {
+	g.heuristic = h
+}
+
+func (g *MatrixGraph) Heuristic(v *Vertex) float64 {
+	return g.heuristic[v.Id]
 }

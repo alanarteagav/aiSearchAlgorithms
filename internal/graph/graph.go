@@ -28,10 +28,20 @@ type Edge struct {
 
 type WeightedEdges map[Edge]int
 type Vertices map[int]*Vertex
+type Heuristic map[int]float64
 
 type Graph interface {
 	Neighbours(*Vertex) []*Vertex
 	Vertices() Vertices
 	Edges() WeightedEdges
 	InitializeVertices()
+	Heuristic(*Vertex) float64
+	SetHeuristic(Heuristic)
 }
+
+type GraphImplementation string
+
+const (
+	Matrix         GraphImplementation = "Matrix Graph"
+	WeightedMatrix GraphImplementation = "Weighted Matrix Graph"
+)

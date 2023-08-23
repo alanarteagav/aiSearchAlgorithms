@@ -5,9 +5,10 @@ import "errors"
 type weightedAdjacencyMatrix = [][]int
 
 type WeightedMatrixGraph struct {
-	matrix   weightedAdjacencyMatrix
-	edges    WeightedEdges
-	vertices Vertices
+	matrix    weightedAdjacencyMatrix
+	edges     WeightedEdges
+	vertices  Vertices
+	heuristic Heuristic
 }
 
 func NewWeightedMatrixGraph(matrix weightedAdjacencyMatrix) (*WeightedMatrixGraph,
@@ -27,9 +28,10 @@ func NewWeightedMatrixGraph(matrix weightedAdjacencyMatrix) (*WeightedMatrixGrap
 		}
 	}
 	return &WeightedMatrixGraph{
-		matrix:   matrix,
-		edges:    edges,
-		vertices: vertices,
+		matrix:    matrix,
+		edges:     edges,
+		vertices:  vertices,
+		heuristic: *new(map[int]float64),
 	}, nil
 }
 
@@ -59,4 +61,12 @@ func (g *WeightedMatrixGraph) InitializeVertices() {
 		v.Visited = false
 		v.Parent = nil
 	}
+}
+
+func (g *WeightedMatrixGraph) SetHeuristic(h Heuristic) {
+	g.heuristic = h
+}
+
+func (g *WeightedMatrixGraph) Heuristic(v *Vertex) float64 {
+	return g.heuristic[v.Id]
 }

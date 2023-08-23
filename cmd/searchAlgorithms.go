@@ -1,14 +1,26 @@
 package main
 
 import (
+	"aiSearchAlgorithms/internal/graph"
+	"aiSearchAlgorithms/internal/graphbuilder"
 	"aiSearchAlgorithms/pkg/algorithms"
-	"aiSearchAlgorithms/testdata"
 	"fmt"
 )
 
 func main() {
 
-	g := testdata.GetTestGraph(testdata.GraphRomania0)
+	b := new(graphbuilder.GraphBuilder)
+	b.WithGraphOrder(5)
+	b.WithEdges(map[graph.Edge]int{
+		{U: 0, V: 1}: 80,
+		{U: 0, V: 2}: 99,
+		{U: 1, V: 3}: 97,
+		{U: 2, V: 4}: 211,
+		{U: 3, V: 4}: 101,
+	})
+	g := b.Build(graph.WeightedMatrix)
+	//g := testdata.GetTestGraph(testdata.GraphRomania0)
+
 	vertices := g.Vertices()
 
 	//setting the goal
@@ -77,4 +89,8 @@ func main() {
 
 	fmt.Println("\nTotal path weight:")
 	fmt.Println(algorithms.PathWeight(answer, g.Edges()))
+
+	g.SetHeuristic(map[int]float64{0: 42.42})
+
+	fmt.Println(g.Heuristic(vertices[0]))
 }

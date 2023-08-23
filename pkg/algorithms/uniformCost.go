@@ -5,6 +5,7 @@ import (
 	"aiSearchAlgorithms/pkg/algorithms/vpriorityqueue"
 )
 
+// Uniform Cost Search implementation
 func UCS(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 	pq := new(vpriorityqueue.VPriorityQueue)
 	g.InitializeVertices()
