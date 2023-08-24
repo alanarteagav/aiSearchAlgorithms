@@ -2,8 +2,10 @@ package graph
 
 import "errors"
 
+// Adjacency matrix alias.
 type adjacencyMatrix = [][]byte
 
+// Adjacency matrix graph implementation.
 type MatrixGraph struct {
 	matrix    adjacencyMatrix
 	edges     WeightedEdges
@@ -11,6 +13,7 @@ type MatrixGraph struct {
 	heuristic Heuristic
 }
 
+// NewMatrixGraph initializes a MatrixGraph.
 func NewMatrixGraph(matrix adjacencyMatrix) (*MatrixGraph, error) {
 	vertices := map[int]*Vertex{}
 	for i, v := range matrix {
@@ -29,6 +32,7 @@ func NewMatrixGraph(matrix adjacencyMatrix) (*MatrixGraph, error) {
 	}, nil
 }
 
+// Neighbours returns the neighbour list of a given vertex of the graph.
 func (g *MatrixGraph) Neighbours(node *Vertex) []*Vertex {
 	neighbours := []*Vertex{}
 	id := node.Id
@@ -40,14 +44,17 @@ func (g *MatrixGraph) Neighbours(node *Vertex) []*Vertex {
 	return neighbours
 }
 
+// Vertices returns the vertex list of the graph.
 func (g *MatrixGraph) Vertices() Vertices {
 	return g.vertices
 }
 
+// Edges returns the weighted edges map of the graph.
 func (g *MatrixGraph) Edges() WeightedEdges {
 	return g.edges
 }
 
+// InitializeVertices sets to default the fields from all the grpah vertices.
 func (g *MatrixGraph) InitializeVertices() {
 	for _, v := range g.vertices {
 		v.Time, v.Level = -1, -1
@@ -57,10 +64,12 @@ func (g *MatrixGraph) InitializeVertices() {
 	}
 }
 
-func (g *MatrixGraph) SetHeuristic(h Heuristic) {
-	g.heuristic = h
-}
-
+// Heuristic returns the heuristic value form a given vertex of the graph.
 func (g *MatrixGraph) Heuristic(v *Vertex) int {
 	return g.heuristic[v.Id]
+}
+
+// SetHeuristic associates a heuristic to the graph.
+func (g *MatrixGraph) SetHeuristic(h Heuristic) {
+	g.heuristic = h
 }

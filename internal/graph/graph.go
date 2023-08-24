@@ -50,10 +50,16 @@ const (
 // Graph interface. Defines the basic desired behaviour for a graph in order to
 // be able to perform searches over it.
 type Graph interface {
+	// Neighbours returns the neighbour list of a given vertex of the graph.
 	Neighbours(*Vertex) []*Vertex
+	// Vertices returns the vertex list of the graph.
 	Vertices() Vertices
+	// Edges returns the weighted edges map of the graph.
 	Edges() WeightedEdges
+	// InitializeVertices sets to default the fields from all the grpah vertices.
 	InitializeVertices()
+	// Heuristic returns the heuristic value form a given vertex of the graph.
 	Heuristic(*Vertex) int
+	// SetHeuristic associates a heuristic to the graph.
 	SetHeuristic(Heuristic)
 }

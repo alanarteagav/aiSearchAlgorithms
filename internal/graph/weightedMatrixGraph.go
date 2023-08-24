@@ -2,6 +2,7 @@ package graph
 
 import "errors"
 
+// Weighted adjacency matrix alias.
 type weightedAdjacencyMatrix = [][]int
 
 type WeightedMatrixGraph struct {
@@ -11,6 +12,7 @@ type WeightedMatrixGraph struct {
 	heuristic Heuristic
 }
 
+// NewWeightedMatrixGraph initializes a WeightedMatrixGraph.
 func NewWeightedMatrixGraph(matrix weightedAdjacencyMatrix) (*WeightedMatrixGraph,
 	error) {
 	vertices := map[int]*Vertex{}
@@ -35,6 +37,7 @@ func NewWeightedMatrixGraph(matrix weightedAdjacencyMatrix) (*WeightedMatrixGrap
 	}, nil
 }
 
+// Neighbours returns the neighbour list of a given vertex of the graph.
 func (g *WeightedMatrixGraph) Neighbours(node *Vertex) []*Vertex {
 	neighbours := []*Vertex{}
 	id := node.Id
@@ -46,14 +49,17 @@ func (g *WeightedMatrixGraph) Neighbours(node *Vertex) []*Vertex {
 	return neighbours
 }
 
+// Vertices returns the vertex list of the graph.
 func (g *WeightedMatrixGraph) Vertices() Vertices {
 	return g.vertices
 }
 
+// Edges returns the weighted edges map of the graph.
 func (g *WeightedMatrixGraph) Edges() WeightedEdges {
 	return g.edges
 }
 
+// InitializeVertices sets to default the fields from all the grpah vertices.
 func (g *WeightedMatrixGraph) InitializeVertices() {
 	for _, v := range g.vertices {
 		v.Time, v.Level = -1, -1
@@ -63,10 +69,12 @@ func (g *WeightedMatrixGraph) InitializeVertices() {
 	}
 }
 
-func (g *WeightedMatrixGraph) SetHeuristic(h Heuristic) {
-	g.heuristic = h
-}
-
+// Heuristic returns the heuristic value form a given vertex of the graph.
 func (g *WeightedMatrixGraph) Heuristic(v *Vertex) int {
 	return g.heuristic[v.Id]
+}
+
+// SetHeuristic associates a heuristic to the graph.
+func (g *WeightedMatrixGraph) SetHeuristic(h Heuristic) {
+	g.heuristic = h
 }
