@@ -1,4 +1,4 @@
-// Package graph provides an interface and several implementations for graphs.
+// graph provides a graph interface and several implementations for graphs.
 package graph
 
 // Vertex represent a graph vertex.
@@ -13,7 +13,7 @@ type Vertex struct {
 	Value    int
 }
 
-// Returns a new initialized vertex, receives its id as an integer.
+// NewVertex returns an initialized vertex, receives its ID as an integer.
 func NewVertex(id int) *Vertex {
 	v := new(Vertex)
 	v.Id = id
@@ -24,7 +24,7 @@ func NewVertex(id int) *Vertex {
 	return v
 }
 
-// Edge defines a graph edge through the ids of it two ends.
+// Edge defines a graph edge through the IDs of it two ends.
 type Edge struct {
 	U int
 	V int
@@ -33,13 +33,13 @@ type Edge struct {
 // Map with graph edges keys and weights values.
 type WeightedEdges map[Edge]int
 
-// Map with vertex ids keys and graph vertices values.
+// Map with vertex IDs keys and graph vertices values.
 type Vertices map[int]*Vertex
 
-// Map with vertex ids keys and heuristic values.
+// Map with vertex IDs keys and heuristic values.
 type Heuristic map[int]int
 
-// Enum to define the different graph implementations.
+// GraphImplementation is an enum used to define different graph implementations.
 type GraphImplementation string
 
 const (
