@@ -16,7 +16,7 @@ func main() {
 	vertices[12].Value = 1
 
 	fmt.Println("\nUCS execution:")
-	answer := algorithms.GBS(g, vertices[0], 1)
+	answer := algorithms.AStar(g, vertices[0], 1)
 
 	vertices = g.Vertices()
 
