@@ -5,6 +5,7 @@ import (
 	"aiSearchAlgorithms/pkg/algorithms/vpriorityqueue"
 )
 
+// A Star (A*) implementation.
 func AStar(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 	pq := new(vpriorityqueue.VPriorityQueue)
 	g.InitializeVertices()

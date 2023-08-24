@@ -5,7 +5,7 @@ import (
 	"aiSearchAlgorithms/pkg/algorithms/vpriorityqueue"
 )
 
-// Breadth First Search implementation
+// Breadth First Search (BFS) implementation.
 func BFS(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 	pq := new(vpriorityqueue.VPriorityQueue)
 	g.InitializeVertices()

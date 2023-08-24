@@ -5,7 +5,7 @@ import (
 	"aiSearchAlgorithms/pkg/algorithms/vpriorityqueue"
 )
 
-// Iterative Deepening depth-first Search (IDS) implementation
+// Iterative Deepening depth-first Search (IDS) implementation.
 func IDS(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 	for l := 1; l < len(g.Vertices()); l++ {
 		pq := new(vpriorityqueue.VPriorityQueue)

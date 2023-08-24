@@ -5,7 +5,7 @@ import (
 	"aiSearchAlgorithms/pkg/algorithms/vpriorityqueue"
 )
 
-// Greedy Best-first Search (GBS) implementation
+// Greedy Best-first Search (GBS) implementation.
 func GBS(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 	pq := new(vpriorityqueue.VPriorityQueue)
 	g.InitializeVertices()
