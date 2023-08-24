@@ -5,6 +5,7 @@ import "errors"
 // Weighted adjacency matrix alias.
 type weightedAdjacencyMatrix = [][]int
 
+// Weighted adjacency matrix graph implementation.
 type WeightedMatrixGraph struct {
 	matrix    weightedAdjacencyMatrix
 	edges     WeightedEdges

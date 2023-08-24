@@ -1,4 +1,4 @@
-// graphbuilder provides a struct and methods for intuitive graph generation.
+// Package graphbuilder provides a struct and methods for intuitive graph generation.
 package graphbuilder
 
 import "aiSearchAlgorithms/internal/graph"

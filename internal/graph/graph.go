@@ -1,4 +1,4 @@
-// graph provides a graph interface and several implementations for graphs.
+// Package graph provides a graph interface and several implementations for graphs.
 package graph
 
 // Vertex represent a graph vertex.
