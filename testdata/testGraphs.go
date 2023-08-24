@@ -91,6 +91,28 @@ func GetTestGraph(name GraphName) graph.Graph {
 			{U: 18, V: 19}: 87,
 		})
 		g := b.Build(graph.WeightedMatrix)
+		g.SetHeuristic(map[int]int{
+			0:  366, // Arad
+			1:  329, // Timisoara
+			2:  374, // Zerind
+			3:  380, // Oradea
+			4:  244, // Lugoj
+			5:  254, // Sibiu
+			6:  241, // Mehadia
+			7:  193, // Rimnicu Vilcea
+			8:  176, // Fagaras
+			9:  242, // Drobeta
+			10: 160, // Craiova
+			11: 100, // Pitesti
+			12: 0,   // Bucharest
+			13: 77,  // Giurgiu
+			14: 80,  // Urziceni
+			15: 151, // Hirsova
+			16: 199, // Vaslui
+			17: 161, // Eforie
+			18: 226, // Isai
+			19: 234, // Neamt
+		})
 		return g
 	}
 

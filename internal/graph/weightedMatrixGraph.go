@@ -31,7 +31,7 @@ func NewWeightedMatrixGraph(matrix weightedAdjacencyMatrix) (*WeightedMatrixGrap
 		matrix:    matrix,
 		edges:     edges,
 		vertices:  vertices,
-		heuristic: *new(map[int]float64),
+		heuristic: *new(map[int]int),
 	}, nil
 }
 
@@ -67,6 +67,6 @@ func (g *WeightedMatrixGraph) SetHeuristic(h Heuristic) {
 	g.heuristic = h
 }
 
-func (g *WeightedMatrixGraph) Heuristic(v *Vertex) float64 {
+func (g *WeightedMatrixGraph) Heuristic(v *Vertex) int {
 	return g.heuristic[v.Id]
 }

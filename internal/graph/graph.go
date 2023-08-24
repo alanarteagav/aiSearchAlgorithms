@@ -28,14 +28,14 @@ type Edge struct {
 
 type WeightedEdges map[Edge]int
 type Vertices map[int]*Vertex
-type Heuristic map[int]float64
+type Heuristic map[int]int
 
 type Graph interface {
 	Neighbours(*Vertex) []*Vertex
 	Vertices() Vertices
 	Edges() WeightedEdges
 	InitializeVertices()
-	Heuristic(*Vertex) float64
+	Heuristic(*Vertex) int
 	SetHeuristic(Heuristic)
 }
 

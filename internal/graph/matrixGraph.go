@@ -25,7 +25,7 @@ func NewMatrixGraph(matrix adjacencyMatrix) (*MatrixGraph, error) {
 		matrix:    matrix,
 		edges:     nil,
 		vertices:  vertices,
-		heuristic: *new(map[int]float64),
+		heuristic: *new(map[int]int),
 	}, nil
 }
 
@@ -61,6 +61,6 @@ func (g *MatrixGraph) SetHeuristic(h Heuristic) {
 	g.heuristic = h
 }
 
-func (g *MatrixGraph) Heuristic(v *Vertex) float64 {
+func (g *MatrixGraph) Heuristic(v *Vertex) int {
 	return g.heuristic[v.Id]
 }

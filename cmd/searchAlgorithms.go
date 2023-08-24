@@ -16,7 +16,7 @@ func main() {
 	vertices[12].Value = 1
 
 	fmt.Println("\nUCS execution:")
-	answer := algorithms.IDS(g, vertices[0], 1)
+	answer := algorithms.GBS(g, vertices[0], 1)
 
 	vertices = g.Vertices()
 
@@ -35,7 +35,7 @@ func main() {
 	fmt.Println("\nTotal path weight:")
 	fmt.Println(algorithms.PathWeight(answer, g.Edges()))
 
-	g.SetHeuristic(map[int]float64{0: 42.42})
+	g.SetHeuristic(map[int]int{0: 42})
 
 	//fmt.Println(g.Heuristic(vertices[0]))
 }
