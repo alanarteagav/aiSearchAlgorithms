@@ -1,3 +1,4 @@
+// Package testdata provides several test graphs for the search algorithms.
 package testdata
 
 import (
@@ -5,6 +6,7 @@ import (
 	"aiSearchAlgorithms/internal/graphbuilder"
 )
 
+// GraphName defines the name of some sample graphs.
 type GraphName string
 
 const (
@@ -15,6 +17,7 @@ const (
 	GraphRomania  GraphName = "GraphRomania"
 )
 
+// GetTestGraph builds and returns a graph among the sample graphs.
 func GetTestGraph(name GraphName) graph.Graph {
 	var matrix [][]byte
 	var weightedMatrix [][]int
