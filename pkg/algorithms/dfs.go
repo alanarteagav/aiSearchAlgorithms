@@ -29,7 +29,7 @@ func DFS(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 			if !y.Visited {
 				y.Time = i
 				y.Level = x.Level + 1
-				y.Priority = 1 / y.Level
+				y.Priority = n - y.Level //1 / y.Level
 				y.Visited = true
 				y.Parent = x
 				pq.AddVertex(y)

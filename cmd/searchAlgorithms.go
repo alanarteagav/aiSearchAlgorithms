@@ -43,6 +43,17 @@ func main() {
 
 	//fmt.Println(g.Heuristic(vertices[0]))
 
-	knapsack.Knapsack("testdata/ks_15_0", algorithms.AStar)
+	indexes, items := knapsack.Knapsack("testdata/ks_10000_0", algorithms.GBS)
+	fmt.Println("indexes", indexes)
+	fmt.Println("items", items)
 
+	totalValue := 0
+	totalWeight := 0
+
+	for _, item := range items {
+		totalValue += item.Value
+		totalWeight += item.Weight
+	}
+
+	fmt.Printf("value: %v, weight: %v\n", totalValue, totalWeight)
 }

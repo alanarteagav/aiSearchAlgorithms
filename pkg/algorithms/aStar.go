@@ -8,7 +8,7 @@ import (
 // A Star (A*) implementation.
 func AStar(g graph.Graph, r *graph.Vertex, goal int) *graph.Vertex {
 	pq := new(vpriorityqueue.VPriorityQueue)
-	//g.InitializeVertices()
+	g.InitializeVertices()
 
 	r.Visited = true
 	r.Priority = 0 + g.Heuristic(r)
