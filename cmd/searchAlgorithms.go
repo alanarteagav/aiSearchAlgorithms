@@ -43,6 +43,6 @@ func main() {
 
 	//fmt.Println(g.Heuristic(vertices[0]))
 
-	knapsack.Knapsack("testdata/ks_3_0", algorithms.AStar)
+	knapsack.Knapsack("testdata/ks_15_0", algorithms.AStar)
 
 }

@@ -8,8 +8,11 @@ import (
 	"fmt"
 )
 
-func Knapsack(path string, algorithm algorithms.SearchAlgorithm) {
-	var bigPrize int
+func Knapsack(path string,
+	algorithm algorithms.SearchAlgorithm) []inputs.KnapsackItem {
+
+	knapsackItems := []inputs.KnapsackItem{}
+	bigPrize := 0
 
 	items, capacity, pairs := inputs.GetKnapsackInfo(path)
 	for _, p := range pairs {
@@ -18,51 +21,57 @@ func Knapsack(path string, algorithm algorithms.SearchAlgorithm) {
 
 	builder := new(graphbuilder.GraphBuilder)
 	var answer *graph.Vertex
-	var parent *graph.Vertex
+	var root *graph.Vertex
 	answerPath := []*graph.Vertex{}
 
-	for i := 0; i < items; i++ {
+	for i := 0; len(pairs) > 0; i++ {
 		edges := graph.WeightedEdges{}
 		heuristic := graph.Heuristic{}
 
-		edgeYes := graph.Edge{U: 0, V: 1}
-		weightYes := capacity - pairs[i+1].Weight
-		heuristic[1] = bigPrize - pairs[i+1].Value
+		for j, pair := range pairs {
+			edge := graph.Edge{U: 0, V: j}
+			weight := capacity - pair.Weight
+			heuristic[j] = bigPrize - pair.Value
+			edges[edge] = weight
+		}
 
-		edgeNo := graph.Edge{U: 0, V: 2}
-		weightNo := capacity
-		heuristic[2] = bigPrize
-
-		edges[edgeYes] = weightYes
-		edges[edgeNo] = weightNo
-		builder.WithGraphOrder(3)
+		builder.WithGraphOrder(items + 1)
 		builder.WithEdges(edges)
 		builder.WithHeuristic(heuristic)
 		g := builder.Build(graph.WeightedMatrix)
 		vertices := g.Vertices()
-		vertices[0].Parent = parent
-		vertices[1].Value = -1
-		vertices[2].Value = -1
+		vertices[0].Parent = root
+
+		for k := 1; k < len(vertices); k++ {
+			weight, ok := edges[graph.Edge{U: 0, V: k}]
+			if ok && weight >= 0 {
+				vertices[k].Value = -1
+			}
+		}
 
 		answer = algorithm(g, g.Vertices()[0], -1)
-		parent = answer
+		if answer == nil {
+			break
+		}
+		root = answer
 		answerPath = append(answerPath, answer)
 
-		if capacity > edges[graph.Edge{U: 0, V: answer.Id}] {
-			capacity = edges[graph.Edge{U: 0, V: answer.Id}]
-			fmt.Println("new capacity:", capacity)
+		newCapacity := edges[graph.Edge{U: 0, V: answer.Id}]
+
+		if newCapacity < 0 {
+			break
 		}
 
-		fmt.Println("ANSWER")
-		fmt.Println(answer)
-		fmt.Println("V2==========================")
-		for _, v := range g.Vertices() {
-			fmt.Println(v)
+		if newCapacity < capacity {
+			capacity = edges[graph.Edge{U: 0, V: answer.Id}]
 		}
-		//fmt.Println(algorithms.Path(answer))
-		fmt.Println("path")
-		for _, v := range answerPath {
-			fmt.Println(v)
-		}
+
+		delete(pairs, answer.Id)
 	}
+	fmt.Println("path")
+	for _, v := range answerPath {
+		fmt.Println(v)
+	}
+
+	return knapsackItems
 }

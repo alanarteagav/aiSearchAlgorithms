@@ -63,5 +63,6 @@ func GetKnapsackInfo(path string) (int, int, map[int]KnapsackItem) {
 		}
 		knapsackItems[i] = KnapsackItem{Value: value, Weight: weight}
 	}
+	delete(knapsackItems, 0)
 	return items, capacity, knapsackItems
 }
