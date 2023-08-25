@@ -28,6 +28,8 @@ func Knapsack(path string,
 	var answer *graph.Vertex
 	var root *graph.Vertex
 
+	fmt.Printf("◉ Initial capacity: %d\n", capacity)
+
 	for i := 0; len(pairs) > 0; i++ {
 		edges := graph.WeightedEdges{}
 		heuristic := graph.Heuristic{}
@@ -74,7 +76,8 @@ func Knapsack(path string,
 		if newCapacity < capacity {
 			capacity = edges[graph.Edge{U: 0, V: answer.Id}]
 		}
-		fmt.Println(newCapacity)
+
+		fmt.Printf("‣ Added item, remaining capacity: %d\n", newCapacity)
 
 		delete(pairs, answer.Id)
 	}

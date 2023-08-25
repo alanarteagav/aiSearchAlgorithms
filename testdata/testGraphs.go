@@ -119,6 +119,31 @@ func GetTestGraph(name GraphName) graph.Graph {
 			19: 234, // Neamt
 		})
 		g := b.Build(graph.WeightedMatrix)
+		names := map[int]string{
+			0:  "Arad",
+			1:  "Timisoara",
+			2:  "Zerind",
+			3:  "Oradea",
+			4:  "Lugoj",
+			5:  "Sibiu",
+			6:  "Mehadia",
+			7:  "Rimnicu Vilcea",
+			8:  "Fagaras",
+			9:  "Drobeta",
+			10: "Craiova",
+			11: "Pitesti",
+			12: "Bucharest",
+			13: "Giurgiu",
+			14: "Urziceni",
+			15: "Hirsova",
+			16: "Vaslui",
+			17: "Eforie",
+			18: "Isai",
+			19: "Neamt",
+		}
+		for i, name := range names {
+			g.Vertices()[i].Name = name
+		}
 		return g
 	}
 
