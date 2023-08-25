@@ -1,12 +1,16 @@
 package main
 
 import (
+	"aiSearchAlgorithms/internal/inputs"
+	"aiSearchAlgorithms/internal/knapsack"
 	"aiSearchAlgorithms/pkg/algorithms"
 	"aiSearchAlgorithms/testdata"
 	"fmt"
 )
 
 func main() {
+
+	fmt.Println(inputs.GetKnapsackInfo("testdata/ks_19_0"))
 
 	g := testdata.GetTestGraph(testdata.GraphRomania)
 
@@ -38,4 +42,7 @@ func main() {
 	g.SetHeuristic(map[int]int{0: 42})
 
 	//fmt.Println(g.Heuristic(vertices[0]))
+
+	knapsack.Knapsack("testdata/ks_3_0", algorithms.AStar)
+
 }

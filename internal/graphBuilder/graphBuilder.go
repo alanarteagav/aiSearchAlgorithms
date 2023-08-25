@@ -8,6 +8,7 @@ import "aiSearchAlgorithms/internal/graph"
 type GraphBuilder struct {
 	graphOrder int
 	edges      graph.WeightedEdges
+	heuristic  graph.Heuristic
 }
 
 // WithGraphOrder defines the desired graph order.
@@ -18,6 +19,10 @@ func (b *GraphBuilder) WithGraphOrder(n int) {
 // WithEdges defines the desired graph edges through an specified weighed edges map.
 func (b *GraphBuilder) WithEdges(w graph.WeightedEdges) {
 	b.edges = w
+}
+
+func (b *GraphBuilder) WithHeuristic(h graph.Heuristic) {
+	b.heuristic = h
 }
 
 // Build returns a graph built with the desired implementation.
@@ -33,6 +38,9 @@ func (b *GraphBuilder) Build(implementation graph.GraphImplementation) graph.Gra
 			matrix[e.V][e.U] = w
 		}
 		g, _ := graph.NewWeightedMatrixGraph(matrix)
+		if b.heuristic != nil {
+			g.SetHeuristic(b.heuristic)
+		}
 		return g
 	}
 	return nil

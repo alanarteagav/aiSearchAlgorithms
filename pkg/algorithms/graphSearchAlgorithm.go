@@ -8,7 +8,7 @@ import (
 // SearchAlgorithms defines an AI graph search algorithm as a function that
 // receives a graph, a distinguished vertex, and a goal. Returns, if found,
 // the vertex which value equals the goal.
-type SearchAlgorithm func(g *graph.Graph, v *graph.Vertex, goal int) *graph.Vertex
+type SearchAlgorithm func(g graph.Graph, v *graph.Vertex, goal int) *graph.Vertex
 
 // Path receives a vertex and returs the list of its ancestors defined by a
 // previously executed search algorithm.
