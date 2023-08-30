@@ -4,9 +4,6 @@ package testdata
 import (
 	"aiSearchAlgorithms/internal/graph"
 	"aiSearchAlgorithms/internal/graphbuilder"
-	"aiSearchAlgorithms/internal/inputs"
-	"fmt"
-	"math"
 )
 
 // GraphName defines the name of some sample graphs.
@@ -154,43 +151,4 @@ func GetTestGraph(name GraphName) graph.Graph {
 		g, _ = graph.NewWeightedMatrixGraph(weightedMatrix)
 	}
 	return g
-}
-
-func BuildKnapsackGraph(path string) graph.Graph {
-	//heuristic := graph.Heuristic{}
-	capacities := map[int]int{}
-	var bigPrize int
-
-	items, capacity, pairs := inputs.GetKnapsackInfo(path)
-	order := int(math.Pow(2, float64(items+1)))
-	capacities[0] = capacity
-
-	for _, p := range pairs {
-		bigPrize += p.Value
-	}
-
-	edges := graph.WeightedEdges{}
-	for i := 0; i <= items; i++ {
-		edgeYes := graph.Edge{U: i, V: 2*i + 1}
-		weightYes := capacities[i] - pairs[i+1].Weight
-		capacities[2*i+1] = weightYes
-
-		edgeNo := graph.Edge{U: i, V: 2*i + 2}
-		weightNo := capacities[i]
-		capacities[2*i+2] = weightNo
-
-		edges[edgeYes] = weightYes
-		edges[edgeNo] = weightNo
-	}
-
-	b := new(graphbuilder.GraphBuilder)
-	fmt.Println(order)
-	matrix := make([][]int, order)
-	for i := range matrix {
-		matrix[i] = make([]int, order)
-	}
-	fmt.Print(len(matrix))
-	//b.WithGraphOrder(order)
-	//b.WithEdges(edges)
-	return b.Build(graph.WeightedMatrix)
 }
