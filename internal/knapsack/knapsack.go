@@ -36,7 +36,7 @@ func Knapsack(path string,
 
 		for j, pair := range pairs {
 			edge := graph.Edge{U: 0, V: j}
-			weight := pair.Weight
+			weight := capacity - pair.Weight
 			heuristic[j] = bigPrize - pair.Value
 			edges[edge] = weight
 		}
