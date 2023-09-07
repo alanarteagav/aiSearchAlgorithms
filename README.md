@@ -1,5 +1,7 @@
 # aiSearchAlgorithms
 
+### Algoritmos de búsqueda para Inteligencia Artificial implementados en Go
+
 Para la ejecución del programa, primeramente debe tenerse instalado en 
 el sistema el lenguaje de programación Go, instrucciones para 
 su instalación pueden encontrarse en:
